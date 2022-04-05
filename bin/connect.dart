@@ -6,10 +6,13 @@ void main (List<String> arguments) async {
   var db = await Db.create("mongodb+srv://jonas:freedown@cluster0.28oko.azure.mongodb.net/stomach?retryWrites=true&w=majority");
   await db.open();
   print('Connected to database: ${untitled10.calculate()}!');
-  DbCollection coll = db.collection('magic');
   var lista = [];
-  var info = await db.getCollectionNames();
-  var stomach = await coll.find().toList();
-  print(stomach);
-  print(info);
+  lista = await db.getCollectionNames();
+  print(lista);
+  for (int count = 0; count < lista.length; count++) {
+    DbCollection coll = db.collection(lista[count].toString());
+    var library = await coll.find().toList();
+    print(lista[count].toString());
+    print(library);
+  }
 }
